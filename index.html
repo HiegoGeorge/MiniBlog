@@ -4,13 +4,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/styles.css"/>
   <title>Mini Blog</title>
 </head>
 <body>
-  <form method="get" action="envio_python">
-    <input type="text" name="nome" placeholder="digite seu Nome aqui">
-    <input type="e-mail" name="email" placeholder="Digite seu e-mail">
-    <input type="submit" name="enviar" value="Enviar">    
+  <div class="cabecario">
+    <h1 id="nomeCabe"> Digite seu usuário</h1>
+  </div>  
+
+  <form class="form" method="get" action="envio_python">
+    <input id="nome" type="text" name="nome" placeholder="digite seu Nome aqui"><br>
+    <input id="email" type="e-mail" name="email" placeholder="Digite seu e-mail"><br>
+    <input id="senha" type="password" name="senha" placeholder="Digite sua Senha"><br>
+    <input id="botao" type="submit" name="enviar" value="Enviar">
 </form>
 </body>
 </html>
