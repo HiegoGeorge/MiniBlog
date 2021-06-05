@@ -8,19 +8,19 @@ from sqlite3 import Error
 app = Flask(__name__)
 
 # 1. Cadastrar Posts
-@app.route('/posts/cadastrar', methods=['POST'])
+@app.route('/novopost', methods=['GET','POST'])
 
 def cadastrar():
-        if request.method == 'POST':
+    if request.method == 'POST':
         titulo = request.form['titulo']
         descricao = request.form['descricao']
         mensagem = 'Erro - nao cadastrado'
-        if descricao:
+        if titulo and descricao:
             registro = (titulo, descricao)
             try:
                 conn = sqlite3.connect('database/db-blog.db')
 
-                sql = ''' INSERT INTO topicos (titulo, descricao)
+                sql = ''' INSERT INTO posts (titulo, descricao)
                               VALUES(?,?) '''
 
                 cur = conn.cursor()
@@ -38,11 +38,11 @@ def cadastrar():
     return render_template('cadastrar.html')
 
 # Listar topicos
-@app.route('/topicos/listar', methods=['GET'])
+@app.route('/posts/listar', methods=['GET'])
 def listar():
     try:
         conn = sqlite3.connect('database/db-blog.db')
-        sql = '''SELECT * FROM topicos'''
+        sql = '''SELECT * FROM posts'''
         cur = conn.cursor()
         cur.execute(sql)
         registros = cur.fetchall()
@@ -51,15 +51,8 @@ def listar():
         print(e)
     finally:
         conn.close()
-#######################################################
-# Deletar topicos
-@app.route("/article/<int:article_id>", methods=["GET"])
-def article_page(article_id):
-    article = Article.query.get(article_id)
-    if article == None:
-        abort(404)
-    return render_template("listar.html", article=article)
-#######################################################
+
+
 # Rota de Erro
 @app.errorhandler(404)
 def pagina_nao_encontrada(e):
